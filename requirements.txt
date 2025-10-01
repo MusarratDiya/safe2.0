@@ -1,0 +1,6 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+openai
+python-dotenv
+psycopg2>=2.9.0

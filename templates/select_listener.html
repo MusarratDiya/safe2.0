@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-lg mx-auto mt-16 bg-blue-900 rounded-lg shadow p-8">
+    <h2 class="text-3xl font-bold mb-6 text-center text-blue-100">Select a Listener</h2>
+    <ul class="divide-y divide-blue-800">
+        {% for listener in listeners %}
+            <li class="py-3">
+                <a href="{{ url_for('chat', receiver_id=listener.id) }}" class="block hover:bg-blue-800 rounded px-2 py-1 text-blue-100 font-semibold">{{ listener.username }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Safe Space</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-base-100 text-base-content min-h-screen">
+    <header class="navbar-palette shadow">
+        <div class="container mx-auto px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between">
+            <h1 class="text-2xl font-bold text-white mb-2 md:mb-0">Safe Space</h1>
+            <nav class="flex flex-wrap gap-2 justify-center md:justify-end">
+                <a href="{{ url_for('home') }}" class="nav-btn">Home</a>
+                {% if session.get('user_id') %}
+                    <a href="{{ url_for('profile') }}" class="nav-btn">Profile</a>
+                    <a href="{{ url_for('mood_tracker') }}" class="nav-btn">Mood Tracker</a>
+                    <a href="{{ url_for('journal') }}" class="nav-btn">Journal</a>
+                    <a href="{{ url_for('habit_tracker') }}" class="nav-btn">Habit Tracker</a>
+                    <a href="{{ url_for('chat_inbox') }}" class="nav-btn">Inbox</a>
+                    <a href="{{ url_for('select_listener') }}" class="nav-btn">Chat with Listener</a>
+                    <a href="{{ url_for('chat_inbox') }}" class="nav-btn">Chat with Bot</a>
+                    <a href="{{ url_for('apply_listener') }}" class="nav-btn">Apply to be Listener</a>
+                    <a href="{{ url_for('admin_panel') }}" class="nav-btn">Admin</a>
+                    <a href="{{ url_for('helpline') }}" class="nav-btn">Helpline</a>
+                    <a href="{{ url_for('logout') }}" class="nav-btn nav-btn-logout">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-btn">Login</a>
+                    <a href="{{ url_for('register') }}" class="nav-btn">Register</a>
+                    <a href="{{ url_for('helpline') }}" class="nav-btn">Helpline</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">
+              {% for message in messages %}
+                <p>{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

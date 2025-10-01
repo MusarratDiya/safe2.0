@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-xl mx-auto mt-10">
+    <h2 class="text-3xl font-bold mb-6 text-center text-blue-900">How are you feeling today?</h2>
+    <form method="POST" action="{{ url_for('mood_tracker') }}" class="mb-8 bg-blue-900 rounded-lg shadow p-6">
+        <label for="mood" class="block text-blue-100 mb-2">Select your mood:</label>
+        <select id="mood" name="mood" class="select select-bordered w-full bg-blue-100 text-blue-900 mb-4" required>
+            <option value="" disabled selected>Choose mood</option>
+            <option value="Happy">😊 Happy</option>
+            <option value="Sad">😢 Sad</option>
+            <option value="Anxious">😰 Anxious</option>
+            <option value="Calm">😌 Calm</option>
+            <option value="Angry">😠 Angry</option>
+            <option value="Excited">🤩 Excited</option>
+            <option value="Tired">😴 Tired</option>
+        </select>
+        <button type="submit" class="btn btn-primary w-full bg-blue-800 border-blue-800 hover:bg-blue-950 text-white">Submit Mood</button>
+    </form>
+    {% if moods %}
+        <div class="bg-blue-800 rounded-lg shadow p-6">
+            <h3 class="text-xl font-semibold text-white mb-4">Your Mood History</h3>
+            <ul class="space-y-2">
+                {% for mood in moods %}
+                    <li class="text-blue-100">
+                        <span class="font-semibold">{{ mood.date.strftime('%b %d, %Y') }}</span>: 
+                        {{ mood.mood }} {% if mood.notes %} - "{{ mood.notes }}" {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+<!-- 
